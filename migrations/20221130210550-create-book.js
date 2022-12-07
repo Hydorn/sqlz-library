@@ -10,13 +10,23 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       name: {
+        allowNull: false,
+        unique: true,
         type: Sequelize.STRING
       },
       pages: {
-        type: Sequelize.NUMBER
+        allowNull: false,
+        type: Sequelize.INTEGER
       },
       authorId: {
-        type: Sequelize.NUMBER
+        type: Sequelize.INTEGER,
+        references:{
+          model: 'authors',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL',
+        defaultValue: null 
       },
       createdAt: {
         allowNull: false,
@@ -24,6 +34,10 @@ module.exports = {
       },
       updatedAt: {
         allowNull: false,
+        type: Sequelize.DATE
+      },
+      deletedAt: {
+        allowNull: true,
         type: Sequelize.DATE
       }
     });
